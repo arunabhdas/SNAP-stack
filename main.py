@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Depends, Response, status, HTTPException
 from schemas import Post
+from router import post
 from typing import List
 
 import models, schemas
-from database import SessionLocal, engine
+from database import SessionLocal, engine, get_db
 from sqlalchemy.orm import Session
 from hashing import Hash
 
@@ -12,17 +13,13 @@ models.Base.metadata.create_all(bind=engine)
 ###############################################################################
 app = FastAPI()
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @app.get('/')
 def index():
-    return 'hello'
+    return 'hello unicorn'
 
+
+app.include_router(post.router)
 ###############################################################################
 @app.post('/blogpost', status_code=status.HTTP_201_CREATED, tags=['posts'])
 def create(request: schemas.Post, db: Session = Depends(get_db)):
@@ -50,10 +47,10 @@ def update(id, request: schemas.Post, db: Session = Depends(get_db)):
     db.commit()
     return {'detail': f"Post with id {id} was updated"}
 
-@app.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
-def get_posts(db: Session = Depends(get_db)):
-   posts = db.query(models.Post).all()
-   return posts
+# @app.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
+# def get_posts(db: Session = Depends(get_db)):
+#    posts = db.query(models.Post).all()
+#    return posts
 
 @app.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost, tags=['posts'])
 def read_post(id, response: Response, db: Session = Depends(get_db)):
