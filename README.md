@@ -27,6 +27,8 @@ pip install sqlalchemy
 
 pip install passlib
 
+pip install bcrypt
+
 
 ```
 
