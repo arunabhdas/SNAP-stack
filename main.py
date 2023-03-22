@@ -5,10 +5,11 @@ from typing import List
 import models, schemas
 from database import SessionLocal, engine
 from sqlalchemy.orm import Session
-from passlib.context import CryptContext
+from hashing import Hash
 
 models.Base.metadata.create_all(bind=engine)
 
+###############################################################################
 app = FastAPI()
 
 def get_db():
@@ -54,26 +55,30 @@ def get_posts(db: Session = Depends(get_db)):
    posts = db.query(models.Post).all()
    return posts
 
-@app.get('/blogpost/{post_id}', status_code=200, response_model=schemas.ShowPost)
-def read_post(post_id, response: Response, db: Session = Depends(get_db)):
-    post = db.query(models.Post).filter(models.Post.id == post_id).first()
+@app.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost)
+def read_post(id, response: Response, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == id).first()
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {post_id} is not available")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {id} is not available")
     return post
 
 ###############################################################################
 
-pwdCtx = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-@app.post('/user')
+@app.post('/user', response_model=schemas.ShowUser)
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
-    hashedPassword = pwdCtx.hash(request.password)
-    new_user = models.User(name = request.name, email = request.email, password = hashedPassword)
+    new_user = models.User(name = request.name, email = request.email, password = Hash.bcrypt(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
     return new_user
 
+
+@app.get('/user/{id}', response_model=schemas.ShowUser)
+def get_user(id:int, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.id == id).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id {id} is not available")
+    return user
 
 ###############################################################################
 

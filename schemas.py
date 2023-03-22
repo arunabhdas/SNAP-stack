@@ -10,7 +10,7 @@ class User(BaseModel):
     password: str
 
 
-class ShowPost(Post):
+class ShowPost(BaseModel):
     title: str
     body: str
     class Config():
@@ -20,3 +20,9 @@ class User(BaseModel):
     name: str
     email: str
     password: str
+
+class ShowUser(BaseModel):
+    name: str
+    email: str
+    class Config():
+        orm_mode = True
