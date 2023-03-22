@@ -64,12 +64,13 @@ def read_post(post_id, response: Response, db: Session = Depends(get_db)):
 
 @app.post('/user')
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
-    new_user = models.User(request)
+    new_user = models.User(name = request.name, email = request.email, password = request.password)
     db.add(new_user)
     db.commit()
-    db.refresh()
+    db.refresh(new_user)
     return new_user
 
 
 ###############################################################################
+
 
