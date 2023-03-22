@@ -25,6 +25,8 @@ Running uvicorn 0.15.0 with CPython 3.10.9 on Darwin
 
 pip install sqlalchemy
 
+pip install passlib
+
 
 ```
 
