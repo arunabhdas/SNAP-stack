@@ -24,7 +24,7 @@ def index():
     return 'hello'
 
 ###############################################################################
-@app.post('/blogpost', status_code=status.HTTP_201_CREATED)
+@app.post('/blogpost', status_code=status.HTTP_201_CREATED, tags=['posts'])
 def create(request: schemas.Post, db: Session = Depends(get_db)):
     new_post = models.Post(title=request.title, body=request.body)
     db.add(new_post)
@@ -32,7 +32,7 @@ def create(request: schemas.Post, db: Session = Depends(get_db)):
     db.refresh(new_post)
     return new_post
 
-@app.delete('/blogpost/{post_id}', status_code=200)
+@app.delete('/blogpost/{post_id}', status_code=200, tags=['posts'])
 def destroy(post_id, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == post_id)
     if not post.first():
@@ -41,7 +41,7 @@ def destroy(post_id, db: Session = Depends(get_db)):
     db.commit()
     return {'detail': f"Post with id {post_id} was deleted"}
 
-@app.put('/blogpost/{post_id}', status_code=status.HTTP_202_ACCEPTED)
+@app.put('/blogpost/{post_id}', status_code=status.HTTP_202_ACCEPTED, tags=['posts'])
 def update(post_id, request: schemas.Post, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == post_id)
     if not post.first():
@@ -50,12 +50,12 @@ def update(post_id, request: schemas.Post, db: Session = Depends(get_db)):
     db.commit()
     return {'detail': f"Post with id {post_id} was updated"}
 
-@app.get('/blogposts', response_model=List[schemas.ShowPost])
+@app.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
 def get_posts(db: Session = Depends(get_db)):
    posts = db.query(models.Post).all()
    return posts
 
-@app.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost)
+@app.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost, tags=['posts'])
 def read_post(id, response: Response, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == id).first()
     if not post:
@@ -64,7 +64,7 @@ def read_post(id, response: Response, db: Session = Depends(get_db)):
 
 ###############################################################################
 
-@app.post('/user', response_model=schemas.ShowUser)
+@app.post('/user', response_model=schemas.ShowUser, tags=['users'])
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
     new_user = models.User(name = request.name, email = request.email, password = Hash.bcrypt(request.password))
     db.add(new_user)
@@ -73,7 +73,7 @@ def create_user(request: schemas.User, db: Session = Depends(get_db)):
     return new_user
 
 
-@app.get('/user/{id}', response_model=schemas.ShowUser)
+@app.get('/user/{id}', response_model=schemas.ShowUser, tags=['users'])
 def get_user(id:int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.id == id).first()
     if not user:
