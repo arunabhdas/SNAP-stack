@@ -26,7 +26,7 @@ def index():
 ###############################################################################
 @app.post('/blogpost', status_code=status.HTTP_201_CREATED, tags=['posts'])
 def create(request: schemas.Post, db: Session = Depends(get_db)):
-    new_post = models.Post(title=request.title, body=request.body)
+    new_post = models.Post(title=request.title, body=request.body, author_id=request.author_id)
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
@@ -41,14 +41,14 @@ def destroy(post_id, db: Session = Depends(get_db)):
     db.commit()
     return {'detail': f"Post with id {post_id} was deleted"}
 
-@app.put('/blogpost/{post_id}', status_code=status.HTTP_202_ACCEPTED, tags=['posts'])
-def update(post_id, request: schemas.Post, db: Session = Depends(get_db)):
-    post = db.query(models.Post).filter(models.Post.id == post_id)
+@app.put('/blogpost/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['posts'])
+def update(id, request: schemas.Post, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == id)
     if not post.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {post_id} not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {id} not found")
     post.update({'title': request.title, 'body': request.body})
     db.commit()
-    return {'detail': f"Post with id {post_id} was updated"}
+    return {'detail': f"Post with id {id} was updated"}
 
 @app.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
 def get_posts(db: Session = Depends(get_db)):
