@@ -11,6 +11,7 @@ class User(BaseModel):
 
 
 class ShowPost(BaseModel):
+    id: int
     title: str
     body: str
     class Config():
@@ -22,6 +23,7 @@ class User(BaseModel):
     password: str
 
 class ShowUser(BaseModel):
+    id: int
     name: str
     email: str
     class Config():
