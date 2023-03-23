@@ -74,50 +74,9 @@ def index():
 
 
 app.include_router(post.router)
-###############################################################################
-
-@app.post('/blogpost', status_code=status.HTTP_201_CREATED, tags=['posts'])
-def create(request: schemas.Post, db: Session = Depends(get_db)):
-    new_post = models.Post(title=request.title, body=request.body, author_id=request.author_id)
-    db.add(new_post)
-    db.commit()
-    db.refresh(new_post)
-    return new_post
-
-@app.delete('/blogpost/{post_id}', status_code=200, tags=['posts'])
-def destroy(post_id, db: Session = Depends(get_db)):
-    post = db.query(models.Post).filter(models.Post.id == post_id)
-    if not post.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {post_id} not found")
-    post.delete(synchronize_session=False)
-    db.commit()
-    return {'detail': f"Post with id {post_id} was deleted"}
-
-@app.put('/blogpost/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['posts'])
-def update(id, request: schemas.Post, db: Session = Depends(get_db)):
-    post = db.query(models.Post).filter(models.Post.id == id)
-    if not post.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {id} not found")
-    post.update({'title': request.title, 'body': request.body})
-    db.commit()
-    return {'detail': f"Post with id {id} was updated"}
-
-@app.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
-def get_posts(db: Session = Depends(get_db)):
-   posts = db.query(models.Post).all()
-   return posts
-
-@app.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost, tags=['posts'])
-def read_post(id, response: Response, db: Session = Depends(get_db)):
-    post = db.query(models.Post).filter(models.Post.id == id).first()
-    if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {id} is not available")
-    return post
 
 ###############################################################################
-
-## Write the CRUD functions for the User model
-
+## User
 
 @app.post('/user', response_model=schemas.ShowUser, tags=['users'])
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
