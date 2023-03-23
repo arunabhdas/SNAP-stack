@@ -1,5 +1,6 @@
-# unicorncms
-Unicorn CMS is a headless Content Management System
+# FAPS-stack
+
+FAPS stack is a FastAPI-Postgres-SvelteKit stack toolkit for building, testing and deploying fullstack CMS, CRM and Mobile SaaS applications
 
 ## Steps for blog
 
