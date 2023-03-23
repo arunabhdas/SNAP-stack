@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Depends, Response, status, HTTPException
+from sqladmin import Admin, ModelView
+from models import User
 from schemas import Post
 from router import post
 from typing import List
@@ -8,12 +10,19 @@ from database import SessionLocal, engine, get_db
 from sqlalchemy.orm import Session
 from hashing import Hash
 
-models.Base.metadata.create_all(bind=engine)
 
 ###############################################################################
 app = FastAPI()
 
+admin = Admin(app, engine)
 
+class UserAdmin(ModelView, model=User):
+    column_list = [User.id, User.name]
+
+
+admin.add_view(UserAdmin)
+
+###############################################################################
 @app.get('/')
 def index():
     return 'hello unicorn'
