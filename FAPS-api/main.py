@@ -116,6 +116,9 @@ def read_post(id, response: Response, db: Session = Depends(get_db)):
 
 ###############################################################################
 
+## Write the CRUD functions for the User model
+
+
 @app.post('/user', response_model=schemas.ShowUser, tags=['users'])
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
     new_user = models.User(name = request.name, email = request.email, password = Hash.bcrypt(request.password))
