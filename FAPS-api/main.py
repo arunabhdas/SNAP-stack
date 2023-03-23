@@ -70,7 +70,7 @@ admin.add_view(PostAdmin)
 ###############################################################################
 @app.get('/')
 def index():
-    return 'hello unicorn'
+    return 'Welcome to FAPS Stack'
 
 
 app.include_router(post.router)
