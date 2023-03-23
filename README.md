@@ -6,6 +6,8 @@ FAPS stack is a FastAPI-Postgres-SvelteKit stack toolkit for building, testing a
 
 <img src="https://raw.githubusercontent.com/arunabhdas/FAPS-stack/main/screenshots/screenshot_1.png" width="720"/>
 
+<img src="https://raw.githubusercontent.com/arunabhdas/FAPS-stack/main/screenshots/screenshot_2.png" width="720"/>
+
 ## Steps for blog
 
 ```
