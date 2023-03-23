@@ -8,7 +8,3 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
-@router.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
-def get_posts(db: Session = Depends(database.get_db)):
-   posts = db.query(models.Post).all()
-   return posts

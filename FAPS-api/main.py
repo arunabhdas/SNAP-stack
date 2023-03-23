@@ -75,6 +75,7 @@ def index():
 
 app.include_router(post.router)
 ###############################################################################
+
 @app.post('/blogpost', status_code=status.HTTP_201_CREATED, tags=['posts'])
 def create(request: schemas.Post, db: Session = Depends(get_db)):
     new_post = models.Post(title=request.title, body=request.body, author_id=request.author_id)
@@ -101,10 +102,10 @@ def update(id, request: schemas.Post, db: Session = Depends(get_db)):
     db.commit()
     return {'detail': f"Post with id {id} was updated"}
 
-# @app.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
-# def get_posts(db: Session = Depends(get_db)):
-#    posts = db.query(models.Post).all()
-#    return posts
+@app.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
+def get_posts(db: Session = Depends(get_db)):
+   posts = db.query(models.Post).all()
+   return posts
 
 @app.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost, tags=['posts'])
 def read_post(id, response: Response, db: Session = Depends(get_db)):
