@@ -8,6 +8,8 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
+###############################################################################
+## Post
 @router.post('/blogpost', status_code=status.HTTP_201_CREATED, tags=['posts'])
 def create(request: schemas.Post, db: Session = Depends(database.get_db)):
     new_post = models.Post(title=request.title, body=request.body, author_id=request.author_id)
@@ -45,3 +47,5 @@ def read_post(id, response: Response, db: Session = Depends(database.get_db)):
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {id} is not available")
     return post
+
+###############################################################################
