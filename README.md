@@ -34,9 +34,10 @@ pip install bcrypt
 ```
 
 
-## Run blog
+## Run
 
 ```
+cd FAPS-api
 
 uvicorn main:app --reload
 
