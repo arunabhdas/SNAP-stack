@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, Response, status, HTTPException
 from sqladmin import Admin, ModelView
-from models import User
+
 from schemas import Post
 from router import post
 from typing import List
@@ -16,12 +16,23 @@ app = FastAPI()
 
 admin = Admin(app, engine)
 
-class UserAdmin(ModelView, model=User):
-    column_list = [User.id, User.name]
+class UserAdmin(ModelView, model=models.User):
+    can_create = True
+    can_edit = True
+    can_delete = True
+    can_view_details = True
+    column_list = [models.User.id, models.User.name]
+
+class PostAdmin(ModelView, model=models.Post):
+    can_create = True
+    can_edit = True
+    can_delete = True
+    can_view_details = True
+    column_list = [models.Post.id, models.Post.title, models.Post.body, models.Post.author_id, models.Post.author]
 
 
 admin.add_view(UserAdmin)
-
+admin.add_view(PostAdmin)
 ###############################################################################
 @app.get('/')
 def index():
