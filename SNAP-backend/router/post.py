@@ -6,11 +6,13 @@ from fastapi import APIRouter, Depends, status, HTTPException, Response
 import schemas, database, models
 from sqlalchemy.orm import Session
 
-router = APIRouter()
+router = APIRouter(
+    tags = ['Posts']
+)
 
 ###############################################################################
 ## Post
-@router.post('/blogpost', status_code=status.HTTP_201_CREATED, tags=['posts'])
+@router.post('/blogpost', status_code=status.HTTP_201_CREATED)
 def create(request: schemas.Post, db: Session = Depends(database.get_db)):
     new_post = models.Post(title=request.title, body=request.body, author_id=request.author_id)
     db.add(new_post)
@@ -18,7 +20,7 @@ def create(request: schemas.Post, db: Session = Depends(database.get_db)):
     db.refresh(new_post)
     return new_post
 
-@router.delete('/blogpost/{id}', status_code=200, tags=['posts'])
+@router.delete('/blogpost/{id}', status_code=200)
 def destroy(id, db: Session = Depends(database.get_db)):
     post = db.query(models.Post).filter(models.Post.id == id)
     if not post.first():
@@ -27,7 +29,7 @@ def destroy(id, db: Session = Depends(database.get_db)):
     db.commit()
     return {'detail': f"Post with id {id} was deleted"}
 
-@router.put('/blogpost/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['posts'])
+@router.put('/blogpost/{id}', status_code=status.HTTP_202_ACCEPTED)
 def update(id, request: schemas.Post, db: Session = Depends(database.get_db)):
     post = db.query(models.Post).filter(models.Post.id == id)
     if not post.first():
@@ -36,12 +38,12 @@ def update(id, request: schemas.Post, db: Session = Depends(database.get_db)):
     db.commit()
     return {'detail': f"Post with id {id} was updated"}
 
-@router.get('/blogposts', response_model=List[schemas.ShowPost], tags=['posts'])
+@router.get('/blogposts', response_model=List[schemas.ShowPost])
 def get_posts(db: Session = Depends(database.get_db)):
    posts = db.query(models.Post).all()
    return posts
 
-@router.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost, tags=['posts'])
+@router.get('/blogpost/{id}', status_code=200, response_model=schemas.ShowPost)
 def read_post(id, response: Response, db: Session = Depends(database.get_db)):
     post = db.query(models.Post).filter(models.Post.id == id).first()
     if not post:
