@@ -44,7 +44,7 @@ pip install sqladmin
 ## Run
 
 ```
-cd FAPS-api
+cd SNAP-backend
 
 uvicorn main:app --reload
 

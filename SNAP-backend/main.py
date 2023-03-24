@@ -17,7 +17,7 @@ from hashing import Hash
 
 ###############################################################################
 # app = FastAPI()
-app = FastAPI(title ="FAPS API", version="0.1.0")
+app = FastAPI(title ="SNAP Stack API", version="0.1.0")
 
 
 ###############################################################################
