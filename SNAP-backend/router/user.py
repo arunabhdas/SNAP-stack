@@ -10,6 +10,7 @@ from hashing import Hash
 router = APIRouter(
     tags = ['Users']
 )
+
 ###############################################################################
 ## User
 
