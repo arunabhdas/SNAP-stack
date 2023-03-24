@@ -1,6 +1,6 @@
-# FAPS-stack
+# SNAP Stack
 
-FAPS stack is a FastAPI-Postgres-SvelteKit stack toolkit for building, testing and deploying fullstack CMS, CRM and Mobile SaaS applications
+SNAP stack is a SvelteKit - NextJS - (fast)API - Postgres- stack toolkit for building, testing and deploying fullstack CMS, CRM and Mobile SaaS applications
 
 ## Screenshots
 
