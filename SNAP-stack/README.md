@@ -46,3 +46,10 @@ Done! You can now:
 cd snap-stack
 npm run dev
 ```
+
+
+## Dependencies
+
+```
+npm install highlight.js
+```

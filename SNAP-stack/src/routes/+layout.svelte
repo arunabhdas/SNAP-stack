@@ -5,7 +5,10 @@
 	import '@skeletonlabs/skeleton/styles/all.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import { AppBar, AppRail, AppShell } from '@skeletonlabs/skeleton';
+	import { AppBar, AppRail, AppShell, storeHighlightJs } from '@skeletonlabs/skeleton';
+	import hljs from 'highlight.js';
+	import 'highlight.js/styles/github-dark.css';
+	storeHighlightJs.set(hljs);
 </script>
 
 <AppShell>
