@@ -6,6 +6,15 @@
                 <span>Prompt Title</span>
                 <input class="input rounded-lg" type="text" placeholder="Enter prompt"/>
             </label>
+
+            <label class="label">
+                <span>AI Platform</span>
+                <select class="select rounded-lg">
+                    <option value="GPT">GPT</option>
+                    <option value="Midjourney">Midjourney</option>
+                    <option value="Stable Diffusion">Stable Diffusion</option>
+                </select>
+            </label>
         </div>
     </div>
 </div>
