@@ -7,3 +7,16 @@ declare namespace App {
 	// interface Error {}
 	// interface Platform {}
 }
+
+interface PromptSnippetInput {
+	title: string
+	platform: string
+	prompt: string
+}
+
+interface PromptSnippet {
+	title: string
+	platform: string
+	prompt: string
+	favorite: boolean
+}
