@@ -13,7 +13,7 @@
 
 <div class="card rounded-lg">
     <header class="card-header">
-        {promptSnippet.title}
+        {promptSnippet.title} - {promptSnippet.platform}
         <div class="float-right">
             <button type="button" class="btn btn-sm variant-filled-secondary rounded-lg" on:click={() => toggleFavorite(index)}>
                 { promptSnippet.favorite ? "Unfavorite" : "Favorite" }

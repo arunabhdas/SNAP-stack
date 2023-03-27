@@ -1,6 +1,10 @@
 <script lang="ts">
     import PromptSnippetCard from "../PromptSnippetCard.svelte";
-	import { promptSnippetStore } from "../PromptSnippetStore";
+	import { promptSnippetStore, addPrompt } from "../PromptSnippetStore";
+	import type { PageData } from "./$types";
+    export let data: PageData;
+
+    data.prompts
     let formData : PromptSnippetInput = {
         title: "",
 	    platform: "midjourney",
@@ -8,18 +12,7 @@
     }
 
     // createPrompt(input: PromptSnippetInput)
-    promptSnippetStore.set(
-        [
-            {
-                title: "SNAP Stack AI Prompt",
-                platform: "midjourney",
-                prompt: "Midjourney Prompt",
-                favorite: false
-
-            }
-
-        ]
-    )
+    promptSnippetStore.set(data.prompts);
 
     // SnippetStore -> local writable that allows us to store prompt snippets
 
@@ -53,9 +46,9 @@
 
             <label class="label">
                 <span>Prompt Snippet</span>
-                <textarea class="textarea rounded-lg" rows="4" placeholder="Enter prompt here"></textarea>
+                <textarea class="textarea rounded-lg" rows="4" placeholder="Enter prompt here" bind:value={formData.prompt}></textarea>
             </label>
-
+            <button type="button" class="btn btn-sm variant-filled-primary" on:click={()=> addPrompt(formData)}>Create Prompt</button>
             <div class="text-center py-0">
                 <h6>My Prompts</h6>
             </div>
