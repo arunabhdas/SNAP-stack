@@ -4,6 +4,8 @@ SNAP stack is a SvelteKit - NextJS - (fast)API - Postgres- stack toolkit for bui
 
 ## Screenshots
 
+<img src="https://raw.githubusercontent.com/arunabhdas/FAPS-stack/main/screenshots/screenshot_2_1.png" width="720"/>
+
 <img src="https://raw.githubusercontent.com/arunabhdas/FAPS-stack/main/screenshots/screenshot_1.png" width="720"/>
 
 <img src="https://raw.githubusercontent.com/arunabhdas/FAPS-stack/main/screenshots/screenshot_2.png" width="720"/>

@@ -9,8 +9,11 @@
 </script>
 
 <AppShell>
+	<svelte:fragment slot="header">
 	<AppBar>
-		<h3 class="text-left">SNAP Stack</h3>
+		<h3 class="text-left"><a href="/">SNAP Stack</a></h3>
+		<a href="about/" class="text-right">About</a>
 	</AppBar>
+	</svelte:fragment>
 		<slot />
 </AppShell>
