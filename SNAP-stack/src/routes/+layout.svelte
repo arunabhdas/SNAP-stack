@@ -5,6 +5,12 @@
 	import '@skeletonlabs/skeleton/styles/all.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
+	import { AppBar, AppRail, AppShell } from '@skeletonlabs/skeleton';
 </script>
 
-<slot />
+<AppShell>
+	<AppBar>
+		<h3 class="text-left">SNAP Stack</h3>
+	</AppBar>
+		<slot />
+</AppShell>
