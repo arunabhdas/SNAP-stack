@@ -1,6 +1,7 @@
 # SNAP Stack
 
-SNAP stack is a SvelteKit - Node - (fast)API - Postgres- stack toolkit for building, testing and deploying fullstack CMS, CRM and Mobile SaaS applications
+SNAP stack is a SvelteKit - Node - (fast)API - Postgres- stack toolkit for building, testing and deploying
+fullstack CMS, CRM and Mobile SaaS applications
 
 ## Screenshots
 
