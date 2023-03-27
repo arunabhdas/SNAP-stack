@@ -15,6 +15,11 @@
                     <option value="Stable Diffusion">Stable Diffusion</option>
                 </select>
             </label>
+
+            <label class="label">
+                <span>Prompt</span>
+                <textarea class="textarea rounded-lg" rows="4" placeholder="Enter prompt here"></textarea>
+            </label>
         </div>
     </div>
 </div>
