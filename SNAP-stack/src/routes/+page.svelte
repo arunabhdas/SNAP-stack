@@ -1,6 +1,10 @@
+<script lang="ts">
+    import PromptSnippetCard from "../PromptSnippetCard.svelte";
+</script>
+
 <div class="flex justify-center">
     <div class="grid grid-cols-1 gap-4 min-w-full md:min-w-[750px]">
-        <h3 class="text-center py-6">Create an AI prompt</h3>
+        <h6 class="text-center py-2">Create an AI prompt</h6>
         <div class="card p-4 w-full text-token space-y-4 rounded-lg">
             <label class="label">
                 <span>Prompt Title</span>
@@ -20,6 +24,11 @@
                 <span>Prompt</span>
                 <textarea class="textarea rounded-lg" rows="4" placeholder="Enter prompt here"></textarea>
             </label>
+
+            <div class="text-center py-0">
+                <h6>My Prompts</h6>
+            </div>
+            <PromptSnippetCard/>
         </div>
     </div>
 </div>
