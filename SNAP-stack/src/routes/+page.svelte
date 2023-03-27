@@ -48,7 +48,7 @@
                 <span>Prompt Snippet</span>
                 <textarea class="textarea rounded-lg" rows="4" placeholder="Enter prompt here" bind:value={formData.prompt}></textarea>
             </label>
-            <button type="button" class="btn btn-sm variant-filled-primary" on:click={()=> addPrompt(formData)}>Create Prompt</button>
+            <button type="button" class="btn btn-sm variant-filled-primary rounded-lg" on:click={()=> addPrompt(formData)}>Create Prompt</button>
             <div class="text-center py-0">
                 <h6>My Prompts</h6>
             </div>
