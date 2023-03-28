@@ -21,7 +21,7 @@
             <button type="button" class="btn btn-sm variant-filled-error rounded-lg" on:click={() => deletePrompt(index)}> X </button>
         </div>
     </header>
-    <section class="p-4">
+    <section class="p-6">
         <CodeBlock language="text" platform={promptSnippet.platform} code={promptSnippet.prompt}/>
     </section>
 </div>

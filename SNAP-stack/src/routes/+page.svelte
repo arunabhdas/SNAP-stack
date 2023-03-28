@@ -28,6 +28,12 @@
 
 <div class="flex justify-center">
     <div class="grid grid-cols-1 gap-4 min-w-full md:min-w-[750px]">
+        <div class="text-center py-0">
+            <h6>My Prompts</h6>
+        </div>
+        {#each $promptSnippetStore as prompt, index}
+        <PromptSnippetCard promptSnippet={prompt} index={index} />
+        {/each}
         <h6 class="text-center py-2">Create an AI prompt</h6>
         <div class="card p-4 w-full text-token space-y-4 rounded-lg">
             <label class="label">
@@ -49,12 +55,7 @@
                 <textarea class="textarea rounded-lg" rows="4" placeholder="Enter prompt here" bind:value={formData.prompt}></textarea>
             </label>
             <button type="button" class="btn btn-sm variant-filled-primary rounded-lg" on:click={()=> addPrompt(formData)}>Create Prompt</button>
-            <div class="text-center py-0">
-                <h6>My Prompts</h6>
-            </div>
-            {#each $promptSnippetStore as prompt, index}
-            <PromptSnippetCard promptSnippet={prompt} index={index} />
-            {/each}
+
         </div>
     </div>
 </div>
