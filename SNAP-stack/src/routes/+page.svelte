@@ -1,8 +1,7 @@
 <script lang="ts">
     import PromptSnippetCard from "../PromptSnippetCard.svelte";
 	import { promptSnippetStore, addPrompt } from "../PromptSnippetStore";
-	import type { PageData } from "./$types";
-    export let data: PageData;
+    export let data;
 
     data.prompts
     let formData : PromptSnippetInput = {

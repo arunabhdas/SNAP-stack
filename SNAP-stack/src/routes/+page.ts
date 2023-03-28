@@ -1,6 +1,4 @@
-import type { PageLoad } from "./$types";
-
-export const load = (() => {
+export const load = () => {
     // can get this data from any source
     // fetch call
     return {
@@ -21,5 +19,4 @@ export const load = (() => {
             }
         ]
     }
-
-}) satisfies PageLoad; // PageLoad -> PageData (in our frontend)
+}
